@@ -4,6 +4,9 @@ import Login from './components/Login';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Alert from './components/Alert';
 import { useState } from 'react';
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+
 
 
 function App() {
@@ -26,9 +29,10 @@ function App() {
     <BrowserRouter>
     <Alert alert={alert}/>
       <Routes>
-        <Route excat path="/" element={<Login showAlert={showAlert}/>}/>
+        <Route excat path="/" element={<Home showAlert={showAlert}/>}/>
         <Route excat path="/login" element={<Login showAlert={showAlert}/>}/>
         <Route excat path="/signup" element={<Signup showAlert={showAlert}/>}/>
+        <Route excat path="/home" element={<Home showAlert={showAlert}/>}/>
       </Routes>
     </BrowserRouter>
   );

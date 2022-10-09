@@ -36,7 +36,7 @@ const Signup = (props) => {
          )
          
         // this is for alert methods 
-         if (json.success) {
+         if (await json.data.success) {
              localStorage.setItem('token', json.authtoken);
              navigate('/login');
              props.showAlert("Account created Successfully", "success");
@@ -81,12 +81,12 @@ const Signup = (props) => {
                     <div className="d-grid">
                     
                         { user.cpassword!==user.password ? <p>Password didn't match</p> : ""}
-                        <button type="submit"className="btn btn-dark"  disabled={ user.cpassword!==user.password && "true"} >Sign up</button>
+                        <button type="submit"className="btn btn-dark"  disabled={ user.cpassword!==user.password && true} >Sign up</button>
                     </div>
                 </form>
-                <div class="mt-3">
-                    <p class="mb-0  text-center">Already have an account? <Link to="/login"
-                            class = "text-secondary fw-bold" > Sign
+                <div className="mt-3">
+                    <p className="mb-0  text-center">Already have an account? <Link to="/login"
+                            className = "text-secondary fw-bold" > Sign
                             Up</Link></p>
                 </div>
             </div>

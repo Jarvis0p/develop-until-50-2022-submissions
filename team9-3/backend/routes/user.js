@@ -108,14 +108,14 @@ router.post('/login', async (req, res) => {
                     authtoken
                 })
             } else {
-                return res.status(400).json({
+                return res.status(401).json({
                     success,
-                    error: "Wrong credentials"
+                    message: "Wrong credentials"
                 })
             }
         } else {
-            return res.status(400).json({
-                error: "Wrong credentials"
+            return res.status(401).json({
+                message: "Wrong credentials"
             });
         }
 
