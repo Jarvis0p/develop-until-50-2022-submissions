@@ -69,9 +69,8 @@ const Signup = (props) => {
        }
   
     return (<>
-        <h1 className="login-head">E-commerce</h1>
         
-    <div className="vh-50 d-flex justify-content-center align-items-center">
+    <div className="vh-50 d-flex justify-content-center align-items-center py-5">
             <div className="col-md-4 p-5 shadow-sm border rounded-3 signup-div">
                 <h2 className="text-center mb-4 text-dark">Signup</h2>
                 <form method='POST' onSubmit={handleSubmit}>
@@ -101,9 +100,7 @@ const Signup = (props) => {
                     </div>
                 </form>
                 <div className="mt-3">
-                    <p className="mb-0  text-center">Already have an account? <Link to="/login"
-                            className = "text-secondary fw-bold" > Sign
-                            Up</Link></p>
+                    <p className="mb-0  text-center">Already have an account? <Link to="/login"className = "text-secondary fw-bold" >Login</Link></p>
                 </div>
             </div>
         </div>

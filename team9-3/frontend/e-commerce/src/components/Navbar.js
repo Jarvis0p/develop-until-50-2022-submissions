@@ -33,7 +33,7 @@ function Navbar(){
                             
                             <li className="nav-item my-1">
                                 <a className="nav-link" href="#">
-                                    <i className="fa fa-shopping-cart"></i> Cart (0)
+                                    <i className="fa fa-shopping-cart"></i> <Link to="/cart"> Cart (0)</Link>
                                 </a>
                             </li>
                     

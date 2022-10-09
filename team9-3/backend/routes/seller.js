@@ -111,13 +111,12 @@ router.post('/login', async (req, res) => {
                     message: "Wrong credentials"
                 })
             }
-        }  {
+        }else{
              res.status(401).json({
                 success,
                 message: "Wrong credentials"
             });
         }
-
     } catch (error) {
         console.log(error);
     }

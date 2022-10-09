@@ -16,18 +16,18 @@ function Login(props){
         
         console.log(type);
         if(type==="customer"){
-            console.log(type+"Inside if else");
            let json1 = await axios.post( "http://localhost:8000/user/login", {
                 email: email,
                 password: password
             })
-                console.log(json1);
+                console.log("above id "+json1.data.success);
                 if (json1.data.success) {
                     // Save the auth token and redirect it
                     localStorage.setItem('token', json1.authtoken);
                     props.showAlert("Login Successfully", "success");
                     navigate('/home');
                 } else {
+                    console.log("inside else"+json1);
                     props.showAlert("Invalide details", "danger")
                 }
             
@@ -37,7 +37,6 @@ function Login(props){
                 email: email,
                 password: password
             })
-                console.log(json2);
                 if (json2.data.success) {
                     // Save the auth token and redirect it
                     localStorage.setItem('token', json2.authtoken);
@@ -47,15 +46,11 @@ function Login(props){
                     props.showAlert("Invalide details", "danger")
                 }
     }
-
-
-     
     }
 
     return (
         <>
-        <h1 className="login-head">E-commerce</h1>
-        <div className="vh-50 d-flex justify-content-center align-items-center">
+        <div className="vh-50 d-flex justify-content-center align-items-center py-5">
 
             <div className="col-md-4 p-5 shadow-sm border rounded-3">
             
