@@ -1,13 +1,15 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {UserContext} from "../Context/User/UserState";
 
 const Signup = (props) => {
   
-//   using state hook for different inputs from form
-
+    //   using state hook for different inputs from form
+    
     let navigate = useNavigate();
+    let {type} = useContext(UserContext);
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -15,6 +17,7 @@ const Signup = (props) => {
         cpassword: ""
     })
 
+    let json;
     // handling submit button afer submitting the form 
     
      const handleSubmit = async (e) => {
@@ -25,16 +28,28 @@ const Signup = (props) => {
              password
          } = user;
 
-        //  using axios for connecting the frontend to the backend and 
-        // sending the details to mongoose database
-        let json =  await axios.post(
-            "http://localhost:8000/createUser",{
-                name:name,
-                email:email,
-                password:password
-            }
-         )
-         
+         if(type === "seller"){
+            //  using axios for connecting the frontend to the backend and 
+            // sending the details to mongoose database
+            // signup for seller
+            json = await axios.post(
+                "http://localhost:8000/seller/signup", {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            )
+         }else{
+            // signup for customer
+             json = await axios.post(
+                 "http://localhost:8000/user/signup", {
+                     name: name,
+                     email: email,
+                     password: password
+                 }
+             )
+
+         }
         // this is for alert methods 
          if (await json.data.success) {
              localStorage.setItem('token', json.authtoken);
@@ -43,8 +58,6 @@ const Signup = (props) => {
          } else {
              props.showAlert("Invalide Credentials", "danger")
          }
-
-
      }
   
         // this is used to change the hook variables
@@ -78,8 +91,11 @@ const Signup = (props) => {
                         <label htmlFor="cpassword" className="form-label">Confirm Password</label>
                         <input type="password" className="form-control border border-dark" id="cpassword" name='cpassword' value={user.cpassword} onChange={onChange} />
                     </div>
+                     <div className="mb-3">
+                        <input type="radio"   name='type' value="seller" onChange={(e) => type = e.target.value} required={true}/> Seller
+                        <input type="radio"   name='type' value="customer" onChange={(e) => type = e.target.value} required={false} /> Customer
+                    </div>
                     <div className="d-grid">
-                    
                         { user.cpassword!==user.password ? <p>Password didn't match</p> : ""}
                         <button type="submit"className="btn btn-dark"  disabled={ user.cpassword!==user.password && true} >Sign up</button>
                     </div>

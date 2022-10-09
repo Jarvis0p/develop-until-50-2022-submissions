@@ -14,7 +14,7 @@ dotenv.config({
 
 
 // Route-1 for creating user
-router.post('/createUser', async (req, res) => {
+router.post('/signup', async (req, res) => {
 
     let success = false;
 
@@ -108,13 +108,13 @@ router.post('/login', async (req, res) => {
                     authtoken
                 })
             } else {
-                return res.status(401).json({
+                 res.status(401).json({
                     success,
                     message: "Wrong credentials"
                 })
             }
         } else {
-            return res.status(401).json({
+            res.status(401).json({
                 message: "Wrong credentials"
             });
         }

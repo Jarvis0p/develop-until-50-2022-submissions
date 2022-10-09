@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema({
         product: String,
         rating: String,
         price: Number
-    }]
+    }],
+    sellerType: {
+        type: String,
+        default:"customer"
+    }
 })
 
 module.exports = mongoose.model('user', userSchema);

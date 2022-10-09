@@ -1,58 +1,99 @@
-.login-head{
+.login-head {
     text-align: center;
     margin: 20px auto;
     font-size: 50px;
 }
 
-.main-navbar{
+.main-navbar {
     border-bottom: 1px solid #ccc;
 }
-.main-navbar .top-navbar{
+
+.main-navbar .top-navbar {
     background-color: #2874f0;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.main-navbar .top-navbar .brand-name{
+
+.main-navbar .top-navbar .brand-name {
     color: #fff;
 }
-.main-navbar .top-navbar .nav-link{
+
+.main-navbar .top-navbar .nav-link {
     color: #fff;
     font-size: 16px;
     font-weight: 500;
 }
-.main-navbar .top-navbar .dropdown-menu{
+
+.main-navbar .top-navbar .dropdown-menu {
     padding: 0px 0px;
     border-radius: 0px;
 }
-.main-navbar .top-navbar .dropdown-menu .dropdown-item{
+
+.main-navbar .top-navbar .dropdown-menu .dropdown-item {
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
     font-size: 14px;
 }
-.main-navbar .top-navbar .dropdown-menu .dropdown-item i{
+
+.main-navbar .top-navbar .dropdown-menu .dropdown-item i {
     width: 20px;
     text-align: center;
     color: #2874f0;
     font-size: 14px;
 }
-.main-navbar .navbar{
+
+.main-navbar .navbar {
     padding: 0px;
     background-color: #ddd;
 }
-.main-navbar .navbar .nav-item .nav-link{
+
+.main-navbar .navbar .nav-item .nav-link {
     padding: 8px 20px;
     color: #000;
     font-size: 15px;
 }
 
 @media only screen and (max-width: 600px) {
-    .main-navbar .top-navbar .nav-link{
+    .main-navbar .top-navbar .nav-link {
         font-size: 12px;
         padding: 8px 10px;
     }
 }
 
-.alert{
-    height:50px;
+.alert {
+    height: 50px;
 }
+
+.card-main-div {
+    margin-top: 10%;
+}
+
+.card-div {
+    margin-bottom: 1%;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.card-row {
+    background-color: #4C6793;
+}
+
+.card-img {
+    width: 90%;
+}
+
+.card-text {
+    font-size: small;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 

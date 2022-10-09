@@ -17,7 +17,11 @@ const sellerSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    userType:{
+        type:String,
+        default: "seller"
     }
 })
 
-module.exports = mongoose.model('seller', userSchema);
+module.exports = mongoose.model('seller', sellerSchema);

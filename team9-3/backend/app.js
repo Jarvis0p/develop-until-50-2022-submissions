@@ -12,7 +12,8 @@ connectToMongo();
 app.use(cors());
 app.use(express.json());
 
-app.use(require('./routes/user'));
+app.use("/user",require('./routes/user'));
+app.use("/seller",require('./routes/seller'));
 
 
 app.get('/',(req,res)=>{

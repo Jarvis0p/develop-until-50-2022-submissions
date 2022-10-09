@@ -1,8 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
+
 function Navbar(){
-    return(
+    let navigate = useNavigate();
+
+     const handleLogout = () => {
+         localStorage.removeItem('token');
+         navigate('/login');
+     }
     
+    return(
         
     <div className="main-navbar shadow-sm sticky-top" >
         <div className="top-navbar" style={{backgroundColor:"#4C6793"}}>
@@ -41,7 +48,7 @@ function Navbar(){
                                 <li><a className="dropdown-item" href="#"><i className="fa fa-user"></i> Profile</a></li>
                                 <li><a className="dropdown-item" href="#"><i className="fa fa-list"></i> My Orders</a></li>
                                 <li><a className="dropdown-item" href="#"><i className="fa fa-shopping-cart"></i> My Cart</a></li>
-                                <li><a className="dropdown-item" href="#"><i className="fa fa-sign-out"></i> Logout</a></li>
+                                <li><a onClick={handleLogout} className="dropdown-item" href="#"><i className="fa fa-sign-out"></i> Logout</a></li>
                                 </ul>
                              </li>}
                             

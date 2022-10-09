@@ -1,33 +1,55 @@
-import React,{useState} from "react"
+import React,{useState,useContext} from "react"
 import {Link,useNavigate} from "react-router-dom";
 import axios from "axios";
+import {UserContext} from "../Context/User/UserState";
 
 function Login(props){
 
     let navigate = useNavigate();
+    let {type} = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        console.log(type);
+        if(type==="customer"){
+            console.log(type+"Inside if else");
+           let json1 = await axios.post( "http://localhost:8000/user/login", {
+                email: email,
+                password: password
+            })
+                console.log(json1);
+                if (json1.data.success) {
+                    // Save the auth token and redirect it
+                    localStorage.setItem('token', json1.authtoken);
+                    props.showAlert("Login Successfully", "success");
+                    navigate('/home');
+                } else {
+                    props.showAlert("Invalide details", "danger")
+                }
+            
+    }else{
+        let json2 = await axios.post(
+            "http://localhost:8000/seller/login", {
+                email: email,
+                password: password
+            })
+                console.log(json2);
+                if (json2.data.success) {
+                    // Save the auth token and redirect it
+                    localStorage.setItem('token', json2.authtoken);
+                    props.showAlert("Login Successfully", "success");
+                    navigate('/home');
+                } else {
+                    props.showAlert("Invalide details", "danger")
+                }
+    }
 
-    let json = await axios.post(
-        "http://localhost:8000/login", {
-            email: email,
-            password: password
-        }
-    )
 
-        console.log(json);
-        if (await json.data.success) {
-            // Save the auth token and redirect it
-            localStorage.setItem('token', json.authtoken);
-            props.showAlert("Login Successfully", "success");
-            navigate('/home');
-        } else {
-            props.showAlert("Invalide details", "danger")
-        }
+     
     }
 
     return (
@@ -46,6 +68,10 @@ function Login(props){
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Password</label>
                         <input type="password" className="form-control border border-dark" id="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                    <div className="mb-3">
+                        <input type="radio"   name='type' value="seller" onChange={(e) => type = e.target.value} required={true}/> Seller
+                        <input type="radio"   name='type' value="customer" onChange={(e) => type = e.target.value} required={false} /> Customer
                     </div>
                     <div className="d-grid">
                         <button className="btn btn-dark" type="submit">Login</button>

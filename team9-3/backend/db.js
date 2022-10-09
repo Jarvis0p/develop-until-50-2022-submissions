@@ -6,9 +6,14 @@ dotenv.config({
 const mongoURI = process.env.DATABASE_URL;
 
 const connectToMongo = () => {
-    mongoose.connect(mongoURI, () => {
+    mongoose.connect(mongoURI, {
+                useNewUrlParser: true,
+                useUnifiedTopology:true
+            }, (response) => {
         console.log("Connected to monogo Successfully");
     })
 }
 
+
+//  useNewUrlParser, useUnifiedTopology, and useCreateIndex are true, and useFindAndModify is false.
 module.exports = connectToMongo;
