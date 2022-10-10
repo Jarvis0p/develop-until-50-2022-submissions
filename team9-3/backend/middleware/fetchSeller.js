@@ -2,14 +2,15 @@ const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv')
 const JWT_secret = process.env.JWT_SECRET;
 
-const fetchUser = (req, res, next) => {
+const fetchSeller = (req, res, next) => {
     // Get the userfrom the jwt token and add id to req object
     const token = req.header('auth-token');
 
     try {
+
         // if()
         const data = jwt.verify(token, JWT_secret);
-        req.user = data.user;
+        req.seller = data.seller;
         next();
     } catch (error) {
         res.status(401).send({
@@ -18,4 +19,4 @@ const fetchUser = (req, res, next) => {
     }
 }
 
-module.exports = fetchUser;
+module.exports = fetchSeller;

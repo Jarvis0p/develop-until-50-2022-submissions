@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.use("/user",require('./routes/user'));
 app.use("/seller",require('./routes/seller'));
+app.use("/product",require('./routes/product'));
 
 
 app.get('/',(req,res)=>{

@@ -1,6 +1,6 @@
 import {
     createContext,
-    // useState
+    useState
 } from 'react';
 
 
@@ -9,11 +9,11 @@ const UserContext = createContext();
 const UserState = (props) => {
 
     // for seller or customer
-    let type = false;
+    const [type, setType] = useState("")
 
 
   return (
-    <UserContext.Provider value={{type}}>
+    <UserContext.Provider value={{type,setType}}>
         {props.children}
     </UserContext.Provider>
   )

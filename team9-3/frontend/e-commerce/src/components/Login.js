@@ -6,7 +6,7 @@ import {UserContext} from "../Context/User/UserState";
 function Login(props){
 
     let navigate = useNavigate();
-    let {type} = useContext(UserContext);
+    let {type,setType} = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -65,8 +65,8 @@ function Login(props){
                         <input type="password" className="form-control border border-dark" id="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="mb-3">
-                        <input type="radio"   name='type' value="seller" onChange={(e) => type = e.target.value} required={true}/> Seller
-                        <input type="radio"   name='type' value="customer" onChange={(e) => type = e.target.value} required={false} /> Customer
+                        <input type="radio"   name='type' value="seller" onChange={(e) => setType(e.target.value)} required={true}/> Seller
+                        <input type="radio"   name='type' value="customer" onChange={(e) => setType(e.target.value)} required={false} /> Customer
                     </div>
                     <div className="d-grid">
                         <button className="btn btn-dark" type="submit">Login</button>

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Seller = require("../models/Seller");
 const bcrypt = require('bcryptjs');
-const fetchUser = require('../middleware/fetchUser');
+const fetchSeller = require('../middleware/fetchSeller');
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv')
 const JWT_secret = process.env.JWT_SECRET;
@@ -99,6 +99,7 @@ router.post('/login', async (req, res) => {
                     }
                 }
                 const authtoken = jwt.sign(data, JWT_secret);
+                console.log(authtoken);
                 success = true;
                 res.status(200).json({
                     success,
@@ -124,7 +125,7 @@ router.post('/login', async (req, res) => {
 
 
 // Route -3 get login details
-router.post('/loggedUser', fetchUser, async (req, res) => {
+router.post('/loggedUser', fetchSeller, async (req, res) => {
     try {
         sellerID = req.seller.id;
         const seller = await Seller.findById(sellerID).select("-password");
