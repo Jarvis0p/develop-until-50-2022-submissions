@@ -19,11 +19,11 @@ const productSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        default: Date.now
+        required: true
     },
     quantity: {
         type: Number,
-        default: "seller"
+        required:true
     }
 })
 

@@ -7,14 +7,14 @@ dotenv.config({
 });
 const app = express();
 const port = process.env.PORT;
-connectToMongo();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/user",require('./routes/user'));
-app.use("/seller",require('./routes/seller'));
-app.use("/product",require('./routes/product'));
+connectToMongo();
+app.use("/user", require('./routes/user'));
+app.use("/seller", require('./routes/seller'));
+app.use("/product", require('./routes/product'));
 
 
 app.get('/',(req,res)=>{

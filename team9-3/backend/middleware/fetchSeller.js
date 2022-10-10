@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv')
-const JWT_secret = process.env.JWT_SECRET;
+const JWT_secret = "mylittlesecret@ecommerce";
+
+
 
 const fetchSeller = (req, res, next) => {
     // Get the userfrom the jwt token and add id to req object
     const token = req.header('auth-token');
 
     try {
-
-        // if()
         const data = jwt.verify(token, JWT_secret);
         req.seller = data.seller;
         next();

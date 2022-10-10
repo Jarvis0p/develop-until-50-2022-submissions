@@ -6,15 +6,70 @@ const fetchSeller = require('../middleware/fetchSeller');
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv')
 const JWT_secret = process.env.JWT_SECRET;
+const Product = require('../models/Product');
 
 dotenv.config({
-    path: __dirname + '/config.env'
+    path: __dirname + '../config.env'
 });
 
-// Route-1 for creating user
+
+// ROUTE : get all the notes using GET "seller/fetchallproducts" Login required
+router.get('/fetchallproducts', fetchSeller, async (req, res) => {
+    sellerID = req.seller.id;
+    const product = await Product.find({
+        seller: sellerID
+    });
+    res.json(product);
+})
+
+
+// ROUTE : get all the notes using GET "seller/addproduct" Login required
+
+router.post('/addproduct', fetchSeller, async (req, res) => {
+
+    try {
+        console.log(req.body);
+        const {
+            name,
+            price,
+            productType,
+            category,
+            quantity
+        } = req.body;
+
+        // if any empty property remains
+        if (!name ||
+            !price ||
+            !productType ||
+            !category ||
+            !quantity) {
+            return res.status(404).json({
+                error: "please fill the property"
+            });
+        }
+
+        const product = new Product({
+            name,
+            price,
+            productType,
+            category,
+            quantity,
+            seller: req.seller.id
+        });
+        const savedProduct = await product.save();
+        res.json(savedProduct);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal server Error");
+    }
+
+})
+
+
+// Route- for creating user
 router.post('/signup', async (req, res) => {
 
-    let success = false;
+    let success = "out";
 
     try {
         const {
@@ -58,7 +113,7 @@ router.post('/signup', async (req, res) => {
         const authtoken = jwt.sign(data, JWT_secret);
         // console.log(authtoken);
         await seller.save();
-        success = true;
+        success = "in";
         res.status(201).json({
             success,
             message: "Seller registered successfully"
@@ -71,9 +126,9 @@ router.post('/signup', async (req, res) => {
 })
 
 
-// Route-2  login
+// Route-  login
 router.post('/login', async (req, res) => {
-    let success = false;
+    let success = "out";
     const {
         email,
         password
@@ -90,7 +145,7 @@ router.post('/login', async (req, res) => {
             email: email
         })
         if (seller) {
-            console.log(password + " " + seller);
+            // console.log(password + " " + seller);
             const validPassword = await bcrypt.compare(password, seller.password);
             if (validPassword) {
                 const data = {
@@ -99,21 +154,21 @@ router.post('/login', async (req, res) => {
                     }
                 }
                 const authtoken = jwt.sign(data, JWT_secret);
-                console.log(authtoken);
-                success = true;
+                // console.log(authtoken);
+                success = "in";
                 res.status(200).json({
                     success,
                     message: "Login Successfully",
                     authtoken
                 })
             } else {
-                 res.status(401).json({
+                 return res.status(400).json({
                     success,
-                    message: "Wrong credentials"
+                    error: "Wrong credentials"
                 })
             }
         }else{
-             res.status(401).json({
+             return res.status(400).json({
                 success,
                 message: "Wrong credentials"
             });
@@ -124,7 +179,9 @@ router.post('/login', async (req, res) => {
 })
 
 
-// Route -3 get login details
+
+
+// Route - get login details
 router.post('/loggedUser', fetchSeller, async (req, res) => {
     try {
         sellerID = req.seller.id;

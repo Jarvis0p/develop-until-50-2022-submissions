@@ -16,7 +16,7 @@ dotenv.config({
 // Route-1 for creating user
 router.post('/signup', async (req, res) => {
 
-    let success = false;
+    let success = "out";
 
     try {
         const {
@@ -60,7 +60,7 @@ router.post('/signup', async (req, res) => {
         const authtoken = jwt.sign(data, JWT_secret);
         // console.log(authtoken);
         await user.save();
-        success = true;
+        success = "in";
         res.status(201).json({
             success,
             message: "User registered successfully"
@@ -75,7 +75,7 @@ router.post('/signup', async (req, res) => {
 
 // Route-2  login
 router.post('/login', async (req, res) => {
-    let success = false;
+    let success = "out";
     const {
         email,
         password
@@ -101,7 +101,7 @@ router.post('/login', async (req, res) => {
                     }
                 }
                 const authtoken = jwt.sign(data, JWT_secret);
-                success = true;
+                success = "in";
                 res.status(200).json({
                     success,
                     message: "Login Successfully",
